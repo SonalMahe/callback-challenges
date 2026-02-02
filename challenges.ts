@@ -29,7 +29,18 @@ console.log(addS(chalk.green("bagel")));
 // 2. A 'callback' function - a function that is applied to each element of the array (inside of the function 'map')
 // Have map return a new array filled with numbers that are the result of using the 'callback' function on each element of the input array.
 // */
-// //console.log(map([1, 2, 3], addTwo));
+type CallbackFunctions = (num : number) => number;
+ const map = (array: number[] , callback: CallbackFunctions) : number[] => {
+  const result:number[] = [];
+  array.forEach(num => { //( check each number and added the result to its new array )
+    result.push(callback(num));
+  });
+  return result;
+};
+
+ 
+console.log(map([1, 2, 3], addTwo)); // use addTwo function here 
+console.log(map([2 ,4, 8] , n=> n*2)); // multiply the number by 2
 
 // // ________________________________________________________________________________________________
 // // Challenge 4
