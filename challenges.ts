@@ -40,7 +40,7 @@ type CallbackFunctions = (num : number) => number;
 
  
 console.log(map([1, 2, 3], addTwo)); // use addTwo function here 
-console.log(map([2 ,4, 8] , n=> n*2)); // multiply the number by 2
+console.log(map([2 ,4, 8] , n => n*2)); // multiply the number by 2
 
 // // ________________________________________________________________________________________________
 // // Challenge 4
@@ -63,10 +63,24 @@ console.log(map([2 ,4, 8] , n=> n*2)); // multiply the number by 2
 // /* 
 // Rebuild your map function, this time instead of using a for loop, use your own forEach function that you just defined. 
 // Call this new function mapWith.//console.log(mapWith([1, 2, 3], addTwo));
-// */
-// //console.log(mapWith([1, 2, 3], addTwo)); should output [ 3, 4, 5 ]
+//*
+type CallbackFunction = (num : number) => number;
+ const mapWith = (array: number[] , callback: CallbackFunction) : number[] => {
+  const result:number[] = [];
+  array.forEach(num => { //( check each number and added the result to its new array )
+    result.push(callback(num));
+  });
+  return result;
+};
 
-// // ________________________________________________________________________________________________
+ 
+console.log(mapWith([1, 2, 3], addTwo)); // use addTwo function here output: [3, 4, 5]
+console.log(mapWith([28, 4, 125] , n => n/4));// divide the number by 4
+
+// 
+
+
+//(ma________________________________________________________________________________________________
 // // Challenge 6
 // /* 
 // The function reduce takes an array and reduces the elements to a single value. 
@@ -80,7 +94,7 @@ console.log(map([2 ,4, 8] , n=> n*2)); // multiply the number by 2
 // };
 // console.log(reduce(nums, add, 0))
 
-// //should output 8
+// //should output 8       
 
 // // ________________________________________________________________________________________________
 // // Challenge 7
