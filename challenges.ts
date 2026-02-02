@@ -67,7 +67,7 @@ console.log(map([2 ,4, 8] , n => n*2)); // multiply the number by 2
 type CallbackFunction = (num : number) => number;
  const mapWith = (array: number[] , callback: CallbackFunction) : number[] => {
   const result:number[] = [];
-  array.forEach(num => { //( check each number and added the result to its new array )
+  array.forEach(num => {      //( check each number and added the result to its new array )
     result.push(callback(num));
   });
   return result;
@@ -87,14 +87,27 @@ console.log(mapWith([28, 4, 125] , n => n/4));// divide the number by 4
 // For example it can sum all the numbers, multiply them, 
 // or any operation that you can put into a function.
 // */
+type OperationFunctions = (a:number, b:number) => number;
+const reduce = (nums: number[], operation: OperationFunctions, p0: number)=>{
+  let result = p0;
+  for(const x of nums)
+  {
+    result = operation(result,x);
+  }
 
-// const nums = [4, 1, 3];
-// const add = function (a, b) {
-//   return a + b;
-// };
-// console.log(reduce(nums, add, 0))
+  return result;
+};
+
+const testarray = [4, 1, 3];
+ const add = function (a:number, b:number) {
+   return a + b;
+ }
+
+ console.log(reduce(testarray, add, 0))
 
 // //should output 8       
+
+
 
 // // ________________________________________________________________________________________________
 // // Challenge 7
@@ -104,6 +117,20 @@ console.log(mapWith([28, 4, 125] , n => n/4));// divide the number by 4
 //   intersection([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20])
 // );
 // // should log: [5, 15]
+
+
+const array: number[][] = [
+ [5, 10, 15, 20],
+ [15, 88, 1, 5, 7],
+ [1, 10, 15, 5, 20]
+]
+
+const intersection:number[] = array.reduce(
+  (acc: number[],curr:number[]) =>  acc.filter(number=> curr.includes(number))
+);
+
+console.log(intersection);
+
 
 // // ________________________________________________________________________________________________
 // // Challenge 8
