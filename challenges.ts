@@ -1,9 +1,9 @@
 import chalk from "chalk";
 // Challenge 1
 /*  Create a function addTwo that accepts one input and adds 2 to it. */
- 
-const addTwo =(num:number) => {
-return num +2;
+
+const addTwo = (num: number) => {
+  return num + 2;
 }
 // To check if you've completed it, uncomment these console.logs!
 console.log(addTwo(3));
@@ -14,7 +14,7 @@ console.log(addTwo(10));
 // /* 
 // Create a function addS that accepts one input and adds an "s" to it.
 // */
-const addS =(message:string) => {
+const addS = (message: string) => {
   return message + "s";
 }
 // // uncomment these to check your work
@@ -29,18 +29,18 @@ console.log(addS(chalk.green("bagel")));
 // 2. A 'callback' function - a function that is applied to each element of the array (inside of the function 'map')
 // Have map return a new array filled with numbers that are the result of using the 'callback' function on each element of the input array.
 // */
-type CallbackFunctions = (num : number) => number;
- const map = (array: number[] , callback: CallbackFunctions) : number[] => {
-  const result:number[] = [];
+type CallbackFunctions = (num: number) => number;
+const map = (array: number[], callback: CallbackFunctions): number[] => {
+  const result: number[] = [];
   array.forEach(num => { //( check each number and added the result to its new array )
     result.push(callback(num));
   });
   return result;
 };
 
- 
+
 console.log(map([1, 2, 3], addTwo)); // use addTwo function here 
-console.log(map([2 ,4, 8] , n => n*2)); // multiply the number by 2
+console.log(map([2, 4, 8], n => n * 2)); // multiply the number by 2
 
 // // ________________________________________________________________________________________________
 // // Challenge 4
@@ -64,18 +64,18 @@ console.log(map([2 ,4, 8] , n => n*2)); // multiply the number by 2
 // Rebuild your map function, this time instead of using a for loop, use your own forEach function that you just defined. 
 // Call this new function mapWith.//console.log(mapWith([1, 2, 3], addTwo));
 //*
-type CallbackFunction = (num : number) => number;
- const mapWith = (array: number[] , callback: CallbackFunction) : number[] => {
-  const result:number[] = [];
+type CallbackFunction = (num: number) => number;
+const mapWith = (array: number[], callback: CallbackFunction): number[] => {
+  const result: number[] = [];
   array.forEach(num => {      //( check each number and added the result to its new array )
     result.push(callback(num));
   });
   return result;
 };
 
- 
-console.log(`Here we use addTwo function:-` , mapWith([1, 2, 3], addTwo)); // use addTwo function here output: [3, 4, 5]
-console.log(`The number is divided by 4:-` , mapWith([28, 4, 125] , n => n/4));// divide the number by 4
+
+console.log(`Here we use addTwo function:-`, mapWith([1, 2, 3], addTwo)); // use addTwo function here output: [3, 4, 5]
+console.log(`The number is divided by 4:-`, mapWith([28, 4, 125], n => n / 4));// divide the number by 4
 
 // 
 
@@ -87,23 +87,21 @@ console.log(`The number is divided by 4:-` , mapWith([28, 4, 125] , n => n/4));/
 // For example it can sum all the numbers, multiply them, 
 // or any operation that you can put into a function.
 // */
-type OperationFunctions = (a:number, b:number) => number;
-const reduce = (nums: number[], operation: OperationFunctions, p: number)  => {
-  let result = 0;
-  for(const n of nums)
-  {
-    result = operation(result,n);
+type OperationCallback = (a: number, b: number) => number;
+const reduce = (nums: number[], operation: OperationCallback, p: number) => {
+  let result = p;
+  for (const n of nums) {
+    result = operation(result, n);
   }
-
   return result;
 };
 
-const testarray = [4, 1, 3];
- const add = function (a:number, b:number) {
-   return a + b;
- }
+//Initialize array.
+const inputArray = [4, 1, 3];
+//OperationCallback function implementation.
+const add = (a: number, b: number) => { return a * b; };
 
- console.log(`The output of these no is:-`, reduce(testarray, add, 0))
+console.log(`The output of these no is:-`, reduce(inputArray, add, 1))
 
 // //should output 8       
 
@@ -119,14 +117,14 @@ const testarray = [4, 1, 3];
 // // should log: [5, 15]
 
 
-const array: number[][] = [
- [5, 10, 15, 20],
- [15, 88, 1, 5, 7],
- [1, 10, 15, 5, 20]
+const array: number[][] = [ //array of arrays
+  [5, 10, 15, 20],
+  [15, 88, 1, 5, 7],
+  [1, 10, 15, 5, 20]
 ]
 
-const intersection:number[] = array.reduce(
-  (acc: number[],curr:number[]) =>  acc.filter(number=> curr.includes(number))
+const intersection: number[] = array.reduce(
+  (previousValue: number[], current: number[]) => previousValue.filter(number => current.includes(number))
 );
 
 console.log(`The intersection of no is: ` + intersection);
@@ -138,17 +136,53 @@ console.log(`The intersection of no is: ` + intersection);
 // Construct a function union that compares input arrays and returns a new array that contains all elements. If there are duplicate elements, only add it once to the new array. Preserve the order of the elements starting from the first element of the first input array. BONUS: Use reduce!
 // */
 
-// console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
+
+const union = (...arrays: number[][]): number[] => {
+  return arrays.reduce((previousValue, currentValue) => {
+    for (let item of currentValue) {
+      if (!previousValue.includes(item)) { //check each item of array that is not includes
+        previousValue.push(item);
+      }
+    }
+    return previousValue;
+  });
+};
+console.log(`The new array is:`, union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
+
 // // should log: [5, 10, 15, 88, 1, 7, 100]
+
 
 // // ________________________________________________________________________________________________
 // // Challenge 9
-// /* 
-// Construct a function objOfMatches that accepts two arrays and a callback. 
-// objOfMatches will build an object and return it. 
-// To build the object, objOfMatches will test each element of the first array using the callback to see if the output matches the corresponding element (by index) of the second array. 
+// /*
+// Construct a function objOfMatches that accepts two arrays and a callback.
+// objOfMatches will build an object and return it.
+// To build the object, objOfMatches will test each element of the first array using the callback to see if the output matches the corresponding element (by index) of the second array.
 // If there is a match, the element from the first array becomes a key in an object, and the element from the second array becomes the corresponding value.
 // */
+// type ObjectFunction =( array: string) => string
+// const objOfMatches = (arr1: string[], arr2: string[], callback:ObjectFunction )  =>
+// {
+//   const result: Record<string, string> = {};
+//   for (let i = 0; i < arr1.length; i++) {
+//     if (callback(arr1[i]) === arr2[i]) {
+//       result[arr1[i]] = arr2[i];
+//     }
+//   }
+//   return result;
+
+// }
+
+
+// function ObjMatch(arr1:string[], arr2:string[], Calculate:(ele:string) => string){
+//   const result: Record<string,string> ={};
+//   for(let i=0; i< arr1.length; i++)
+//   {
+    
+//     if(Calculate(arr1[i]) === arr2[i])
+//   }
+// }
+
 
 // console.log(
 //   objOfMatches(
@@ -164,11 +198,33 @@ console.log(`The intersection of no is: ` + intersection);
 
 // // ________________________________________________________________________________________________
 // // Challenge 10
-// /* 
-// Construct a function multiMap that will accept two arrays: an array of values and an array of callbacks. 
-// multiMap will return an object whose keys match the elements in the array of values. 
+// /*
+// Construct a function multiMap that will accept two arrays: an array of values and an array of callbacks.
+// multiMap will return an object whose keys match the elements in the array of values.
 // The corresponding values that are assigned to the keys will be arrays consisting of outputs from the array of callbacks, where the input to each callback is the key.
 // */
+
+type MultimapFunction = (str: string) => string ;
+const multiMap= (strArray:string[], callback1: MultimapFunction, callback2: MultimapFunction, callback3: MultimapFunction) =>
+{
+  const result: Record<string,string[]> ={};
+
+  for(const item of strArray)
+  {
+    const records = [callback1(item), callback2(item), callback3(item)];
+    (result[item] ||= []).push(...records);   
+  }  
+
+  return result;
+}
+
+const callback1 = (str:string) => {return str.toUpperCase()};
+const callback2 = (str:string) => {return str[0]?.toUpperCase() + str.slice(1).toLowerCase()};
+const callback3= (str:string) => {return str + str};
+
+console.log(
+  multiMap(["catfood", "glue", "beer"], callback1, callback2, callback3)
+);
 
 // console.log(
 //   multiMap(
@@ -189,11 +245,13 @@ console.log(`The intersection of no is: ` + intersection);
 
 // // should log: { catfood: ['CATFOOD', 'Catfood', 'catfoodcatfood'], glue: ['GLUE', 'Glue', 'glueglue'], beer: ['BEER', 'Beer', 'beerbeer'] }
 
+
+
 // // ________________________________________________________________________________________________
 // // Challenge 11
-// /* 
-// Construct a function objectFilter that accepts an object as the first parameter and a callback function as the second parameter. 
-// objectFilter will return a new object. 
+// /*
+// Construct a function objectFilter that accepts an object as the first parameter and a callback function as the second parameter.
+// objectFilter will return a new object.
 // The new object will contain only the properties from the input object such that the property's value is equal to the property's key passed into the callback.
 // */
 
@@ -208,8 +266,8 @@ console.log(`The intersection of no is: ` + intersection);
 
 // // ________________________________________________________________________________________________
 // // Challenge 12
-// /* Create a function majority that accepts an array and a callback. 
-// The callback will return either true or false. majority will iterate through the array and perform the callback on each element until it can be determined if the majority of the return values from the callback are true. 
+// /* Create a function majority that accepts an array and a callback.
+// The callback will return either true or false. majority will iterate through the array and perform the callback on each element until it can be determined if the majority of the return values from the callback are true.
 // If the number of true returns is equal to the number of false returns, majority should return false.
 //  */
 
@@ -219,7 +277,7 @@ console.log(`The intersection of no is: ` + intersection);
 // console.log(majority([1, 2, 3, 4, 5, 7, 9, 11], isOdd));
 // // should log: true
 
-// console.log(majority([2, 3, 4, 5], isOdd)); 
+// console.log(majority([2, 3, 4, 5], isOdd));
 // // should log: false
 
 // // ________________________________________________________________________________________________
@@ -240,10 +298,10 @@ console.log(`The intersection of no is: ` + intersection);
 
 // // ________________________________________________________________________________________________
 // // Challenge 14
-// /* 
-// Create a function countBy that accepts an array and a callback, and returns an object. 
-// countBy will iterate through the array and perform the callback on each element. 
-// Each return value from the callback will be saved as a key on the object. 
+// /*
+// Create a function countBy that accepts an array and a callback, and returns an object.
+// countBy will iterate through the array and perform the callback on each element.
+// Each return value from the callback will be saved as a key on the object.
 // The value associated with each key will be the number of times that particular return value was returned.
 // */
 
@@ -256,10 +314,10 @@ console.log(`The intersection of no is: ` + intersection);
 
 // // ________________________________________________________________________________________________
 // // Challenge 15
-// /* 
-// Create a function groupBy that accepts an array and a callback, and returns an object. 
-// groupBy will iterate through the array and perform the callback on each element. 
-// Each return value from the callback will be saved as a key on the object. 
+// /*
+// Create a function groupBy that accepts an array and a callback, and returns an object.
+// groupBy will iterate through the array and perform the callback on each element.
+// Each return value from the callback will be saved as a key on the object.
 // The value associated with each key will be an array consisting of all the elements that resulted in that return value when passed into the callback.
 // */
 
@@ -273,10 +331,10 @@ console.log(`The intersection of no is: ` + intersection);
 
 // // ________________________________________________________________________________________________
 // // Challenge 16
-// /* 
-// Create a function goodKeys that accepts an object and a callback. 
-// The callback will return either true or false. 
-// goodKeys will iterate through the object and perform the callback on each value. 
+// /*
+// Create a function goodKeys that accepts an object and a callback.
+// The callback will return either true or false.
+// goodKeys will iterate through the object and perform the callback on each value.
 // goodKeys will then return an array consisting only the keys whose associated values yielded a true return value from the callback.
 // */
 
@@ -296,11 +354,11 @@ console.log(`The intersection of no is: ` + intersection);
 
 // // ________________________________________________________________________________________________
 // // Challenge 17
-// /* 
-// Create a function commutative that accepts two callbacks and a value. 
-// commutative will return a boolean indicating if the passing the value into the first function, 
-// and then passing the resulting output into the second function, 
-// yields the same output as the same operation with the order of the functions reversed (passing the value into the second function, 
+// /*
+// Create a function commutative that accepts two callbacks and a value.
+// commutative will return a boolean indicating if the passing the value into the first function,
+// and then passing the resulting output into the second function,
+// yields the same output as the same operation with the order of the functions reversed (passing the value into the second function,
 // and then passing the output into the first function).
 // */
 
@@ -318,10 +376,10 @@ console.log(`The intersection of no is: ` + intersection);
 
 
 // // Challenge 18
-// /* 
-// Create a function objFilter that accepts an object and a callback. 
-// objFilter should make a new object, and then iterate through the passed-in object, 
-// using each key as input for the callback. If the output from the callback is equal to the corresponding value, 
+// /*
+// Create a function objFilter that accepts an object and a callback.
+// objFilter should make a new object, and then iterate through the passed-in object,
+// using each key as input for the callback. If the output from the callback is equal to the corresponding value,
 // then that key-value pair is copied into the new object. objFilter will return this new object.
 // */
 
@@ -335,9 +393,9 @@ console.log(`The intersection of no is: ` + intersection);
 
 // // ________________________________________________________________________________________________
 // // Challenge 19
-// /* 
-// Create a function rating that accepts an array (of functions) and a value. 
-// All the functions in the array will return true or false. 
+// /*
+// Create a function rating that accepts an array (of functions) and a value.
+// All the functions in the array will return true or false.
 // rating should return the percentage of functions from the array that return true when the value is used as input.
 // */
 
@@ -349,17 +407,17 @@ console.log(`The intersection of no is: ` + intersection);
 // console.log(rating(checks, 64));
 // // should log: 100
 
-// console.log(rating(checks, 66)); 
+// console.log(rating(checks, 66));
 // // should log: 75
 
 // // ________________________________________________________________________________________________
 // // Challenge 20
-// /* 
-// Create a function pipe that accepts an array (of functions) and a value. 
-// pipe should input the value into the first function in the array, 
-// and then use the output from that function as input for the second function, 
-// and then use the output from that function as input for the third function, 
-// and so forth, until we have an output from the last function in the array. 
+// /*
+// Create a function pipe that accepts an array (of functions) and a value.
+// pipe should input the value into the first function in the array,
+// and then use the output from that function as input for the second function,
+// and then use the output from that function as input for the third function,
+// and so forth, until we have an output from the last function in the array.
 // pipe should return the final output.
 // */
 
@@ -372,10 +430,10 @@ console.log(`The intersection of no is: ` + intersection);
 // // should log: 'CATcatCATcat'
 // // ________________________________________________________________________________________________
 // // Challenge 21
-// /* 
-// Create a function highestFunc that accepts an object (which will contain functions) 
-// and a subject (which is any value). highestFunc should return the key of the object 
-// whose associated value (which will be a function) returns the largest number, 
+// /*
+// Create a function highestFunc that accepts an object (which will contain functions)
+// and a subject (which is any value). highestFunc should return the key of the object
+// whose associated value (which will be a function) returns the largest number,
 // when the subject is given as input.
 // */
 
@@ -394,11 +452,11 @@ console.log(`The intersection of no is: ` + intersection);
 
 // // ________________________________________________________________________________________________
 // // Challenge 22
-// /* 
-// Create a function, combineOperations, that takes two parameters: a starting value and an array of functions. 
-// combineOperations should pass the starting value into the first function in the array. 
-// combineOperations should pass the value returned by the first function into the second function, 
-// and so on until every function in the array has been called. combineOperations should return the final value 
+// /*
+// Create a function, combineOperations, that takes two parameters: a starting value and an array of functions.
+// combineOperations should pass the starting value into the first function in the array.
+// combineOperations should pass the value returned by the first function into the second function,
+// and so on until every function in the array has been called. combineOperations should return the final value
 // returned by the last function in the array.
 // */
 
@@ -429,10 +487,10 @@ console.log(`The intersection of no is: ` + intersection);
 
 // // ________________________________________________________________________________________________
 // // Challenge 23
-// /* 
+// /*
 // Define a function myFunc that takes an array and a callback.
-// myFunc should pass each element from the array (in order) into the callback. 
-// If the callback returns true, myFunc should return the index of the current element. 
+// myFunc should pass each element from the array (in order) into the callback.
+// If the callback returns true, myFunc should return the index of the current element.
 // If the callback never returns true, myFunc should return -1;
 // */
 
@@ -450,9 +508,9 @@ console.log(`The intersection of no is: ` + intersection);
 
 // // ________________________________________________________________________________________________
 // // Challenge 24
-// /* Write a function myForEach that accepts an array and a callback function. 
-// Your function should pass each element of the array (in order) into the callback function. 
-// The behavior of this function should mirror the functionality of the native .forEach() 
+// /* Write a function myForEach that accepts an array and a callback function.
+// Your function should pass each element of the array (in order) into the callback function.
+// The behavior of this function should mirror the functionality of the native .forEach()
 // JavaScript array method as closely as possible.
 //  */
 
