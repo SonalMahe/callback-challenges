@@ -2,7 +2,7 @@ import chalk from "chalk";
 // Challenge 1
 /*  Create a function addTwo that accepts one input and adds 2 to it. */
  
-const addTwo =(num:number) =>{
+const addTwo =(num:number) => {
 return num +2;
 }
 // To check if you've completed it, uncomment these console.logs!
@@ -14,7 +14,7 @@ console.log(addTwo(10));
 // /* 
 // Create a function addS that accepts one input and adds an "s" to it.
 // */
-const addS =(message:string)=>{
+const addS =(message:string) => {
   return message + "s";
 }
 // // uncomment these to check your work
@@ -74,8 +74,8 @@ type CallbackFunction = (num : number) => number;
 };
 
  
-console.log(mapWith([1, 2, 3], addTwo)); // use addTwo function here output: [3, 4, 5]
-console.log(mapWith([28, 4, 125] , n => n/4));// divide the number by 4
+console.log(`Here we use addTwo function:-` , mapWith([1, 2, 3], addTwo)); // use addTwo function here output: [3, 4, 5]
+console.log(`The number is divided by 4:-` , mapWith([28, 4, 125] , n => n/4));// divide the number by 4
 
 // 
 
@@ -88,11 +88,11 @@ console.log(mapWith([28, 4, 125] , n => n/4));// divide the number by 4
 // or any operation that you can put into a function.
 // */
 type OperationFunctions = (a:number, b:number) => number;
-const reduce = (nums: number[], operation: OperationFunctions, p0: number)=>{
-  let result = p0;
-  for(const x of nums)
+const reduce = (nums: number[], operation: OperationFunctions, p: number)  => {
+  let result = 0;
+  for(const n of nums)
   {
-    result = operation(result,x);
+    result = operation(result,n);
   }
 
   return result;
@@ -103,7 +103,7 @@ const testarray = [4, 1, 3];
    return a + b;
  }
 
- console.log(reduce(testarray, add, 0))
+ console.log(`The output of these no is:-`, reduce(testarray, add, 0))
 
 // //should output 8       
 
@@ -129,7 +129,7 @@ const intersection:number[] = array.reduce(
   (acc: number[],curr:number[]) =>  acc.filter(number=> curr.includes(number))
 );
 
-console.log(intersection);
+console.log(`The intersection of no is: ` + intersection);
 
 
 // // ________________________________________________________________________________________________
