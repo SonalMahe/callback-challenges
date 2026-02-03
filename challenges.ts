@@ -1,4 +1,6 @@
 import chalk from "chalk";
+
+
 // Challenge 1
 /*  Create a function addTwo that accepts one input and adds 2 to it. */
 
@@ -6,10 +8,14 @@ const addTwo = (num: number) => {
   return num + 2;
 }
 // To check if you've completed it, uncomment these console.logs!
-console.log(addTwo(3));
-console.log(addTwo(10));
+console.log(chalk.magenta(addTwo(3)));
+console.log(chalk.magenta(addTwo(10)));
 
-// // ________________________________________________________________________________________________
+
+
+
+
+// // ______________DONE__________________________________________________________________________________
 // // Challenge 2
 // /* 
 // Create a function addS that accepts one input and adds an "s" to it.
@@ -21,7 +27,12 @@ const addS = (message: string) => {
 console.log(addS(chalk.green("pizza")));
 console.log(addS(chalk.green("bagel")));
 
-// // ________________________________________________________________________________________________
+
+
+
+
+
+// // _____________________DONE___________________________________________________________________________
 // // Challenge 3
 // /* 
 // Create a function called map that takes two inputs:
@@ -39,8 +50,12 @@ const map = (array: number[], callback: CallbackFunctions): number[] => {
 };
 
 
-console.log(map([1, 2, 3], addTwo)); // use addTwo function here 
-console.log(map([2, 4, 8], n => n * 2)); // multiply the number by 2
+console.log(`addTwo function:- `, map([1, 2, 3], addTwo)); // use addTwo function here 
+console.log(`Multiply the no. by 2:- ` , map([2, 4, 8], n => n * 2)); // multiply the number by 2
+
+
+
+
 
 // // ________________________________________________________________________________________________
 // // Challenge 4
@@ -58,7 +73,11 @@ console.log(map([2, 4, 8], n => n * 2)); // multiply the number by 2
 // // should output abcd
 // */
 
-// // ________________________________________________________________________________________________
+
+
+
+
+// // ______________________________DONE__________________________________________________________________
 // // Challenge 5
 // /* 
 // Rebuild your map function, this time instead of using a for loop, use your own forEach function that you just defined. 
@@ -80,7 +99,9 @@ console.log(`The number is divided by 4:-`, mapWith([28, 4, 125], n => n / 4));/
 // 
 
 
-//(ma________________________________________________________________________________________________
+
+
+//(ma_________________________________________DONE_______________________________________________________
 // // Challenge 6
 // /* 
 // The function reduce takes an array and reduces the elements to a single value. 
@@ -107,7 +128,9 @@ console.log(`The output of these no is:-`, reduce(inputArray, add, 1))
 
 
 
-// // ________________________________________________________________________________________________
+
+
+// // ________________________________DONE________________________________________________________________
 // // Challenge 7
 // /* Construct a function intersection that compares input arrays and returns a new array with elements found in all of the inputs. BONUS: Use reduce!
 //  */
@@ -130,7 +153,9 @@ const intersection: number[] = array.reduce(
 console.log(`The intersection of no is: ` + intersection);
 
 
-// // ________________________________________________________________________________________________
+
+
+// // ______________________DONE__________________________________________________________________________
 // // Challenge 8
 // /* 
 // Construct a function union that compares input arrays and returns a new array that contains all elements. If there are duplicate elements, only add it once to the new array. Preserve the order of the elements starting from the first element of the first input array. BONUS: Use reduce!
@@ -196,7 +221,11 @@ console.log(`The new array is:`, union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15,
 
 // // should log: { hi: 'HI', bye: 'BYE', later: 'LATER' }
 
-// // ________________________________________________________________________________________________
+
+
+
+
+// // _______DONE_________________________________________________________________________________________
 // // Challenge 10
 // /*
 // Construct a function multiMap that will accept two arrays: an array of values and an array of callbacks.
@@ -244,6 +273,9 @@ console.log(
 // );
 
 // // should log: { catfood: ['CATFOOD', 'Catfood', 'catfoodcatfood'], glue: ['GLUE', 'Glue', 'glueglue'], beer: ['BEER', 'Beer', 'beerbeer'] }
+
+
+
 
 
 
